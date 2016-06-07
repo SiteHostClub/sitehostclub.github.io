@@ -238,43 +238,8 @@ $('#mc-embedded-subscribe').on('click', function(event) {
 // Submit the form with an ajax/jsonp request.
 // Based on http://stackoverflow.com/a/15120409/215821
 function submitSubscribeForm($form) {
-    $.ajax({
-        type: "GET",
-        url: $form.attr("action"),
-        data: $form.serialize(),
-        cache: false,
-        dataType: "jsonp",
-        jsonp: "c", // trigger MailChimp to return a JSONP response
-        contentType: "application/json; charset=utf-8",
-
-        error: function(error){
-            // According to jquery docs, this is never called for cross-domain JSONP requests
-        },
-
-        success: function(data){
-            var resultMessage = data.msg || "Sorry. Unable to subscribe. Please try again later.";
-
-            if (data.result != "success") {
-                console.log(data.msg + data.msg.indexOf("already subscribed"));
-                if (data.msg && data.msg.indexOf("already subscribed") >= 0) {
-                    // Success subscribed
-                    // var Gleam = Gleam || [];
-                    Gleam.push(['UserEmailSU']);
-                    resultMessage = "You're already subscribed! Thank you.";
-                    document.getElementById("confirm").innerHTML = resultMessage;
-                    document.getElementById("confirm").style.visibility = "visible";
-                }
-            } else {
-                // Success subscribed
-                // var Gleam = Gleam || [];
-                Gleam.push(['UserEmailSU']);
-                resultMessage = "Thanks for signing up! Please check your email and confirm.";
-                document.getElementById("confirm").innerHTML = resultMessage;
-                document.getElementById("confirm").style.visibility = "visible";
-            }
-
-        }
-    });
+	$.get('http://grain-giveaway-subscribe.forgeapp.io/add?email='+$('#mce-EMAIL').val());
+	Gleam.push(['UserEmailSU', $('#mce-EMAIL').val()]);
 }
 
   </script>
