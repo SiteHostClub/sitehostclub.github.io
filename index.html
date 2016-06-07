@@ -252,17 +252,20 @@ function submitSubscribeForm($form) {
             if (data.result != "success") {
                 console.log(data.msg + data.msg.indexOf("already subscribed"));
                 if (data.msg && data.msg.indexOf("already subscribed") >= 0) {
+                    // Success subscribed
+                    var Gleam = Gleam || [];
+                    Gleam.push(['UserEmailSU']);
                     resultMessage = "You're already subscribed! Thank you.";
                     document.getElementById("confirm").innerHTML = resultMessage;
                     document.getElementById("confirm").style.visibility = "visible";
                 }
             } else {
-                resultMessage = "Thanks for signing up! Please check your email and confirm.";
-                document.getElementById("confirm").innerHTML = resultMessage;
-                document.getElementById("confirm").style.visibility = "visible";
                 // Success subscribed
                 var Gleam = Gleam || [];
                 Gleam.push(['UserEmailSU']);
+                resultMessage = "Thanks for signing up! Please check your email and confirm.";
+                document.getElementById("confirm").innerHTML = resultMessage;
+                document.getElementById("confirm").style.visibility = "visible";
             }
 
         }
