@@ -253,7 +253,7 @@ function submitSubscribeForm($form) {
                 console.log(data.msg + data.msg.indexOf("already subscribed"));
                 if (data.msg && data.msg.indexOf("already subscribed") >= 0) {
                     // Success subscribed
-                    var Gleam = Gleam || [];
+                    // var Gleam = Gleam || [];
                     Gleam.push(['UserEmailSU']);
                     resultMessage = "You're already subscribed! Thank you.";
                     document.getElementById("confirm").innerHTML = resultMessage;
@@ -261,7 +261,7 @@ function submitSubscribeForm($form) {
                 }
             } else {
                 // Success subscribed
-                var Gleam = Gleam || [];
+                // var Gleam = Gleam || [];
                 Gleam.push(['UserEmailSU']);
                 resultMessage = "Thanks for signing up! Please check your email and confirm.";
                 document.getElementById("confirm").innerHTML = resultMessage;
