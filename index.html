@@ -244,6 +244,9 @@ function validateEmail(email) {
     return re.test(email);
 }
 $('.email-form').submit(function () {
+  resultMessage = "Please wait...";
+  document.getElementById("confirm").innerHTML = resultMessage;
+  document.getElementById("confirm").style.visibility = "visible";
   var email = $('#mce-EMAIL').val();
 	if (validateEmail(email)) {
 		$.get('http://grain-giveaway-subscribe.forgeapp.io/add?email='+email, function (data) {
