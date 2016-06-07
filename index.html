@@ -237,9 +237,32 @@ $('#mc-embedded-subscribe').on('click', function(event) {
 
 // Submit the form with an ajax/jsonp request.
 // Based on http://stackoverflow.com/a/15120409/215821
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 function submitSubscribeForm($form) {
-	$.get('http://grain-giveaway-subscribe.forgeapp.io/add?email='+$('#mce-EMAIL').val());
-	Gleam.push(['UserEmailSU', $('#mce-EMAIL').val()]);
+	var email = $('#mce-EMAIL').val();
+	if (validateEmail(email)) {
+		$.get('http://grain-giveaway-subscribe.forgeapp.io/add?email='+email, function (data) {
+			if (data == "good") {
+				Gleam.push(['UserEmailSU', email);
+				resultMessage = "Thanks for signing up! You should be awarded your bonus entries now!";
+		                    document.getElementById("confirm").innerHTML = resultMessage;
+		                    document.getElementById("confirm").style.visibility = "visible";
+			}
+			else {
+				resultMessage = "There was an unknown error.  Please try again.";
+		                    document.getElementById("confirm").innerHTML = resultMessage;
+		                    document.getElementById("confirm").style.visibility = "visible";
+			}
+		});
+	}
+	else {
+		resultMessage = "Please enter your valid email address (We send confirmation emails).";
+                    document.getElementById("confirm").innerHTML = resultMessage;
+                    document.getElementById("confirm").style.visibility = "visible";
+	}
 }
 
   </script>
