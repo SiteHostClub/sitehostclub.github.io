@@ -232,7 +232,7 @@ $('.email-form').submit(function () {
 		$.get('http://grain-giveaway-subscribe.forgeapp.io/add?email='+email, function (data) {
 			if (data == "good") {
 				Gleam.push(['UserEmailSU', email]);
-				resultMessage = "Thanks for signing up! You should be awarded your bonus entries now!";
+				resultMessage = "Thanks for signing up! You should be awarded your key now!";
 		                    document.getElementById("confirm").innerHTML = resultMessage;
 		                    document.getElementById("confirm").style.visibility = "visible";
 			}
